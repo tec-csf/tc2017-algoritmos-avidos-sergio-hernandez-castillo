@@ -1,10 +1,10 @@
 /**
  * 1. Declare the maximum weight of the backpack.
- * 2. Create a Element struct containing the weight and value of an element.
+ * 2. Create a Element struct containing the weight, value, and value/weight ratio of an element.
  * 3. Create an array of elements.
  * 4. Fill the array of elements with random numbers for the weights (from 1 to the maximum weight of 
  *    the backpack) and the values (from 1 to 100).
- * 5. Sort the array of elements, depending on their weights and values.
+ * 5. Sort the array of elements, depending on their ratios.
  * 6. Open a loop. While there are elements to be analyzed and the current weight of the backpack hasn't reached
  *    maximum weight:
  *    a. Check if the element can be added to the backpack. If the element weighs less than the maximum 
@@ -16,12 +16,14 @@
 
 #include <iostream>
 #include <time.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 struct Element{
     int weight;
     int value;
+    double ratio;
 };//Close Element
 
 void fillArray(Element *e, int elements, int maxWeight){
@@ -30,8 +32,15 @@ void fillArray(Element *e, int elements, int maxWeight){
     for (int i = 0; i < elements; i++){
         e[i].weight = rand() % maxWeight + 1;
         e[i].value = rand() % 100 + 1;
+        e[i].ratio = (double) e[i].value / (double) e[i].weight;
     }//Close for
 }//Close fillArray
+
+bool compareTwoElements(Element e, Element f){
+    if (e.ratio != f.ratio){
+        return ((e.weight < f.weight) && (e.value < f.value));
+    }//Close if 
+}//Close compareTwoElements
 
 int main(){
     const int elements = 10;
@@ -39,10 +48,17 @@ int main(){
     struct Element e[elements];
 
     fillArray(e, elements, maxWeight);
+    sort(e, e + elements, compareTwoElements);
 
     for (int i = 0; i < elements; i++){
         cout << "The weight of element " << i + 1 << " is: " << e[i].weight << endl;
+    }//Close for
+
+    for (int i = 0; i < elements; i++){
         cout << "The value of element " << i + 1 << " is: " << e[i].value << endl;
-        //cout << "\n" << endl;
-    }//Close for 
+    }//Close for
+
+    for (int i = 0; i < elements; i++){
+        cout << "The ratio of element " << i + 1 << " is: " << e[i].ratio << endl;
+    }//Close for
 }//Close main 
