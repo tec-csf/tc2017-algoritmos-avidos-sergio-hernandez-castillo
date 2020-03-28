@@ -77,7 +77,7 @@ bool compareByWeight(Element e, Element f){
 
 /**
  * Prints important information for the user to know (total 
- *      elements to be analyzed, maximum weight of the backpack
+ *      elements to be analyzed, maximum weight of the backpack,
  *      total value of the elements, the weight/value of each
  *      element) and calculates which element gets to go inside
  *      the backpack. Then it prints which elements were added to
@@ -136,8 +136,8 @@ void backpack(Element *e, const int elements, const int maxWeight){
         }//Close if 
 
         /**
-         * If the element was too much weight for the backpack, discard it (make the 
-         * same index in "sol" equal to 0).
+         * If the element plus the current weight was too much weight for the 
+         * backpack, discard it (make the same index in "sol" equal to 0).
         */
         else {
             sol[i] = 0;
